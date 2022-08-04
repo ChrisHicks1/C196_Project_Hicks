@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hi 1"></TextView>
+                android:text="Hi 1 how much can i add to this, does it take up the whole page?? I am curious where it starts and stops, or does it possibly wrap under by itself?"></TextView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
