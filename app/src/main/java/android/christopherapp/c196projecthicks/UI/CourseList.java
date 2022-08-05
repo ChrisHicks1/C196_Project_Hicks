@@ -1,13 +1,19 @@
 package android.christopherapp.c196projecthicks.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.christopherapp.c196projecthicks.Database.Repository;
+import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.List;
 
 public class CourseList extends AppCompatActivity {
 
@@ -17,6 +23,13 @@ public class CourseList extends AppCompatActivity {
         setContentView(R.layout.activity_courses_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        RecyclerView recyclerView=findViewById(R.id.recyclerView);
+        Repository repo=new Repository(getApplication());
+        List<Courses> courses=repo.getAllCourses();
+        final CoursesAdapter adapter=new CoursesAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setCourses(courses);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -28,7 +41,7 @@ public class CourseList extends AppCompatActivity {
 
     }
 
-    public boolean onOptionsTermSelected(MenuItem course) {
+    public boolean onOptionsItemSelected(MenuItem course) {
         switch (course.getItemId()) {
             case android.R.id.home:
                 this.finish();
