@@ -9,20 +9,24 @@ public class Courses {
     @PrimaryKey(autoGenerate = true)
     private int courseID;
     private String courseName;
+    private String startDate;
+    private String endDate;
+    private String courseStatus;
+    private String ciName;
+    private String ciPhone;
+    private String ciEmail;
 
-    public Courses(int courseID, String courseName, String courseStatus, String ciName, String ciPhone, String ciEmail) {
+    public Courses(int courseID, String courseName, String startDate, String endDate, String courseStatus, String ciName, String ciPhone, String ciEmail) {
         this.courseID = courseID;
         this.courseName = courseName;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.courseStatus = courseStatus;
         this.ciName = ciName;
         this.ciPhone = ciPhone;
         this.ciEmail = ciEmail;
     }
 
-    private String courseStatus;
-    private String ciName;
-    private String ciPhone;
-    private String ciEmail;
 
     public int getCourseID() {
         return courseID;
@@ -38,6 +42,22 @@ public class Courses {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getCourseStatus() {
@@ -72,11 +92,14 @@ public class Courses {
         this.ciEmail = ciEmail;
     }
 
+
     @Override
     public String toString() {
         return "Courses{" +
                 "courseID=" + courseID +
                 ", courseName='" + courseName + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 ", courseStatus='" + courseStatus + '\'' +
                 ", ciName='" + ciName + '\'' +
                 ", ciPhone='" + ciPhone + '\'' +

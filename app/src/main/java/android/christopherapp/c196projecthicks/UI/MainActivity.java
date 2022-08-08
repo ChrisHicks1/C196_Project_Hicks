@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Repository repo = new Repository(getApplication());
-        Courses courses=new Courses(1, "C196", "In Progress", "CI Person", "222-222-2222", "anEmail@email.com");
+        Courses courses=new Courses(1, "Mobile App Development", "07/19/2022", "08/22/2022","In Progress", "CI Person", "222-222-2222", "anEmail@email.com");
         repo.insert(courses);
 
         Term term=new Term(1, "First Term");
