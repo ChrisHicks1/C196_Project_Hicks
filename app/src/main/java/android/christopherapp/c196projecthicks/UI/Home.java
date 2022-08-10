@@ -16,7 +16,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void toAssessments(View view) {
-        Intent intent=new Intent(Home.this, CourseInfo.class );
+        Intent intent=new Intent(Home.this, AssessmentList.class );
         startActivity(intent);
     }
 

@@ -34,6 +34,16 @@
             android:label="Term Information"
             android:exported="false" />
         <activity
+            android:name=".UI.AssessmentList"
+            android:parentActivityName=".UI.Home"
+            android:label="Assessment List"
+            android:exported="false" />
+        <activity
+            android:name=".UI.AssessmentInfo"
+            android:parentActivityName=".UI.Home"
+            android:label="Assessment Information"
+            android:exported="false" />
+        <activity
             android:name=".UI.Home"
             android:parentActivityName=".UI.MainActivity"
             android:exported="false" />
