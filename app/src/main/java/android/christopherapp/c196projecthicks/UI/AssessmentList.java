@@ -1,5 +1,9 @@
 package android.christopherapp.c196projecthicks.UI;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
 import android.christopherapp.c196projecthicks.R;
@@ -9,13 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class AssessmentList extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +49,9 @@ public class AssessmentList extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(assessments);
     }
+
     public void goToAssessmentInfo(View view) {
         Intent intent=new Intent(AssessmentList.this, AssessmentInfo.class);
         startActivity(intent);
     }
-
 }

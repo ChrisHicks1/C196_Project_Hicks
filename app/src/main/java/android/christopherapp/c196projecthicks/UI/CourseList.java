@@ -50,7 +50,6 @@ public class CourseList extends AppCompatActivity {
         return super.onOptionsItemSelected(course);
     }
 
-
     public void goToCourseInfo(View view) {
         Intent intent=new Intent(CourseList.this, CourseInfo.class);
         startActivity(intent);

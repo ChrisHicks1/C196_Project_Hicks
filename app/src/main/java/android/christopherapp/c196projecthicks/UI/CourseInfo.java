@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -112,5 +113,8 @@ public class CourseInfo extends AppCompatActivity {
     }
 
 
-
+    public void goToAssessmentList(View view) {
+        Intent intent=new Intent(CourseInfo.this, AssessmentList.class);
+        startActivity(intent);
+    }
 }

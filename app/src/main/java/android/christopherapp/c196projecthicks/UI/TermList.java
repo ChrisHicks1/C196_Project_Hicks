@@ -50,7 +50,6 @@ public class TermList extends AppCompatActivity {
         return super.onOptionsItemSelected(terms);
     }
 
-
     public void goToTermInfo(View view) {
         Intent intent=new Intent(TermList.this, TermInfo.class);
         startActivity(intent);
