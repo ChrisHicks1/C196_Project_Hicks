@@ -14,9 +14,9 @@
         android:theme="@style/Theme.C196ProjectHicks"
         tools:targetApi="31">
         <activity
-            android:name=".UI.AssessmentList"
+            android:name=".UI.CourseInfo"
             android:parentActivityName=".UI.Home"
-            android:label="Assessment List"
+            android:label="Course Information"
             android:exported="false" />
         <activity
             android:name=".UI.CourseList"
@@ -27,6 +27,11 @@
             android:name=".UI.TermList"
             android:parentActivityName=".UI.Home"
             android:label="Term List"
+            android:exported="false" />
+        <activity
+            android:name=".UI.TermInfo"
+            android:parentActivityName=".UI.Home"
+            android:label="Term Information"
             android:exported="false" />
         <activity
             android:name=".UI.Home"

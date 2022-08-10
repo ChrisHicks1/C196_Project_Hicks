@@ -5,15 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.R;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-public class AssessmentList extends AppCompatActivity {
+public class CourseInfo extends AppCompatActivity {
 
 
     EditText editCourseName;
@@ -39,7 +37,7 @@ public class AssessmentList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_list);
+        setContentView(R.layout.activity_course_info);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -104,7 +102,7 @@ public class AssessmentList extends AppCompatActivity {
 
     }
 
-    public boolean onOptionsTermSelected(MenuItem assessment) {
+    public boolean onOptionsItemSelected(MenuItem assessment) {
         switch (assessment.getItemId()) {
             case android.R.id.home:
                 this.finish();

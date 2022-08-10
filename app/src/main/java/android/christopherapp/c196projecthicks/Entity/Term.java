@@ -9,10 +9,14 @@ public class Term {
     @PrimaryKey(autoGenerate = true)
     private int termID;
     private String termName;
+    private String termStart;
+    private String termEnd;
 
-    public Term(int termID, String termName) {
+    public Term(int termID, String termName, String termStart, String termEnd) {
         this.termID = termID;
         this.termName = termName;
+        this.termStart = termStart;
+        this.termEnd = termEnd;
     }
 
     public int getTermID() {
@@ -31,11 +35,29 @@ public class Term {
         this.termName = termName;
     }
 
+    public String getTermStart() {
+        return termStart;
+    }
+
+    public void setTermStart(String termStart) {
+        this.termStart = termStart;
+    }
+
+    public String getTermEnd() {
+        return termEnd;
+    }
+
+    public void setTermEnd(String termEnd) {
+        this.termEnd = termEnd;
+    }
+
     @Override
     public String toString() {
         return "Term{" +
                 "termID=" + termID +
                 ", termName='" + termName + '\'' +
+                ", termStart='" + termStart + '\'' +
+                ", termEnd='" + termEnd + '\'' +
                 '}';
     }
 }
