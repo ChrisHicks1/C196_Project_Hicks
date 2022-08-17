@@ -23,10 +23,10 @@ public class CourseList extends AppCompatActivity {
         setContentView(R.layout.activity_courses_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        RecyclerView recyclerView=findViewById(R.id.recyclerView);
-        Repository repo=new Repository(getApplication());
-        List<Courses> courses=repo.getAllCourses();
-        final CoursesAdapter adapter=new CoursesAdapter(this);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        Repository repo = new Repository(getApplication());
+        List<Courses> courses = repo.getAllCourses();
+        final CoursesAdapter adapter = new CoursesAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setCourses(courses);
@@ -51,7 +51,7 @@ public class CourseList extends AppCompatActivity {
     }
 
     public void goToCourseInfo(View view) {
-        Intent intent=new Intent(CourseList.this, CourseInfo.class);
+        Intent intent = new Intent(CourseList.this, CourseInfo.class);
         startActivity(intent);
     }
 }

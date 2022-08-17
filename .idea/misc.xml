@@ -6,8 +6,10 @@
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3255" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/drawable/ic_baseline_school_24.xml" value="0.3255" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3255" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3405" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/activity_assessment_info.xml" value="0.3859375" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/activity_assessment_list.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/activity_course_detail.xml" value="0.3859375" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/activity_course_info.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/activity_courses_list.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/activity_home.xml" value="0.38697916666666665" />
@@ -17,9 +19,12 @@
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/assessment_list_item.xml" value="0.3859375" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/courses_list_item.xml" value="0.3859375" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/layout/term_list_item.xml" value="0.289453125" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/menu/assessment_detail.xml" value="0.3859375" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/menu/course_detail.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/menu/menu_assessmentlist.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/menu/menu_courselist.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/menu/menu_termlist.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/menu/term_detail.xml" value="0.3859375" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/C196ProjectHicks/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.209" />
       </map>
     </option>
