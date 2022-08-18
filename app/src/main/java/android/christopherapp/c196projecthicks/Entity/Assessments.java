@@ -10,11 +10,15 @@ public class Assessments {
     private int assessmentID;
     private String assessmentName;
     private String assessmentType;
+    private String startDate;
+    private String endDate;
 
-    public Assessments(int assessmentID, String assessmentName, String assessmentType) {
+    public Assessments(int assessmentID, String assessmentName, String assessmentType, String startDate, String endDate) {
         this.assessmentID = assessmentID;
         this.assessmentName = assessmentName;
         this.assessmentType = assessmentType;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getAssessmentID() {
@@ -41,12 +45,30 @@ public class Assessments {
         this.assessmentType = assessmentType;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     @Override
     public String toString() {
         return "Assessments{" +
                 "assessmentID=" + assessmentID +
                 ", assessmentName='" + assessmentName + '\'' +
                 ", assessmentType='" + assessmentType + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 '}';
     }
 }

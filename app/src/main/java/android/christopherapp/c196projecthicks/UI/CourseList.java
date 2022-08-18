@@ -51,7 +51,7 @@ public class CourseList extends AppCompatActivity {
     }
 
     public void goToCourseInfo(View view) {
-        Intent intent = new Intent(CourseList.this, CourseInfo.class);
+        Intent intent = new Intent(CourseList.this, CourseDetail.class);
         startActivity(intent);
     }
 }

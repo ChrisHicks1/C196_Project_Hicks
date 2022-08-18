@@ -10,6 +10,7 @@ import android.christopherapp.c196projecthicks.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Term term=new Term(1, "First Term", "06/01/2022", "11/30/2022");
         repo.insert(term);
 
-        Assessments assessments=new Assessments(1, "Application Development", "Performance");
+        Assessments assessments=new Assessments(1, "Application Development", "@", "08/18/22", "08/24/22");
         repo.insert(assessments);
 
     }

@@ -85,10 +85,6 @@ public class Repository {
 
 
 
-
-
-
-
     public List<Term> getAllTerms(){
         databaseExecutor.execute(()->{
             mAllTerms=mTermDAO.getAllTerms();
@@ -137,7 +133,6 @@ public class Repository {
             e.printStackTrace();
         }
     }
-
 
 
 

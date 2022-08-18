@@ -12,10 +12,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
 public class AssessmentList extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +48,17 @@ public class AssessmentList extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+
+
         }
         return super.onOptionsItemSelected(assessments);
     }
 
     public void goToAssessmentInfo(View view) {
-        Intent intent=new Intent(AssessmentList.this, AssessmentInfo.class);
+        Intent intent=new Intent(AssessmentList.this, AssessmentDetail.class);
         startActivity(intent);
     }
+
+
+
 }
