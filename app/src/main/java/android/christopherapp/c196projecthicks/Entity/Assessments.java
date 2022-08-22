@@ -1,19 +1,36 @@
 package android.christopherapp.c196projecthicks.Entity;
 
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "assessments")
 public class Assessments {
+
+    @NonNull
+    @ColumnInfo(name = "assessmentID")
     @PrimaryKey(autoGenerate = true)
     private int assessmentID;
+
+    @NonNull
+    @ColumnInfo(name = "assessmentName")
     private String assessmentName;
+
+    @NonNull
+    @ColumnInfo(name = "assessmentType")
     private String assessmentType;
+
+    @NonNull
+    @ColumnInfo(name = "startDate")
     private String startDate;
+
+    @NonNull
+    @ColumnInfo(name = "endDate")
     private String endDate;
 
-    public Assessments(int assessmentID, String assessmentName, String assessmentType, String startDate, String endDate) {
+    public Assessments(@NonNull int assessmentID, @NonNull String assessmentName, @NonNull String assessmentType, @NonNull String startDate, @NonNull String endDate) {
         this.assessmentID = assessmentID;
         this.assessmentName = assessmentName;
         this.assessmentType = assessmentType;
@@ -29,6 +46,7 @@ public class Assessments {
         this.assessmentID = assessmentID;
     }
 
+    @NonNull
     public String getAssessmentName() {
         return assessmentName;
     }
@@ -37,6 +55,7 @@ public class Assessments {
         this.assessmentName = assessmentName;
     }
 
+    @NonNull
     public String getAssessmentType() {
         return assessmentType;
     }
@@ -45,6 +64,7 @@ public class Assessments {
         this.assessmentType = assessmentType;
     }
 
+    @NonNull
     public String getStartDate() {
         return startDate;
     }
@@ -53,6 +73,7 @@ public class Assessments {
         this.startDate = startDate;
     }
 
+    @NonNull
     public String getEndDate() {
         return endDate;
     }
@@ -61,6 +82,7 @@ public class Assessments {
         this.endDate = endDate;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Assessments{" +

@@ -1,35 +1,33 @@
 package android.christopherapp.c196projecthicks.UI;
 
+import android.christopherapp.c196projecthicks.Database.Repository;
+import android.christopherapp.c196projecthicks.Entity.Notes;
+import android.christopherapp.c196projecthicks.R;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.christopherapp.c196projecthicks.Database.Repository;
-import android.christopherapp.c196projecthicks.Entity.Term;
-import android.christopherapp.c196projecthicks.R;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
 import java.util.List;
 
-public class TermList extends AppCompatActivity {
+public class NoteList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_list);
+        setContentView(R.layout.activity_note_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        RecyclerView recyclerView=findViewById(R.id.recyclerView1);
+        RecyclerView recyclerView=findViewById(R.id.recyclerView);
         Repository repo=new Repository(getApplication());
-        List<Term> terms=repo.getAllTerms();
-        final TermAdapter adapter=new TermAdapter(this);
+        List<Notes> notes=repo.getAllNotes();
+        final NoteAdapter adapter=new NoteAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setTerm(terms);
+        adapter.setNotes(notes);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,17 +39,12 @@ public class TermList extends AppCompatActivity {
 
     }
 
-    public boolean onOptionsItemSelected(MenuItem terms) {
-        switch (terms.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem notes) {
+        switch (notes.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
         }
-        return super.onOptionsItemSelected(terms);
-    }
-
-    public void goToTermInfo(View view) {
-        Intent intent=new Intent(TermList.this, TermDetail.class);
-        startActivity(intent);
+        return super.onOptionsItemSelected(notes);
     }
 }

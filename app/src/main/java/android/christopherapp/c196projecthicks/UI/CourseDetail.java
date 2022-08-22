@@ -1,6 +1,8 @@
 package android.christopherapp.c196projecthicks.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -8,6 +10,7 @@ import android.app.PendingIntent;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
 import android.christopherapp.c196projecthicks.Entity.Courses;
+import android.christopherapp.c196projecthicks.Entity.Notes;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class CourseDetail extends AppCompatActivity {
@@ -162,6 +166,23 @@ public class CourseDetail extends AppCompatActivity {
             }
         };
 
+        RecyclerView recyclerView=findViewById(R.id.recyclerView2);
+        Repository repo=new Repository(getApplication());
+        List<Assessments> assessments=repo.getAllAssessments();
+        final AssessmentAdapter adapter=new AssessmentAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setAssessments(assessments);
+
+
+        RecyclerView recyclerView1=findViewById(R.id.recyclerView4);
+        Repository repo1=new Repository(getApplication());
+        List<Notes> notes=repo1.getAllNotes();
+        final NoteAdapter adapter1=new NoteAdapter(this);
+        recyclerView1.setAdapter(adapter1);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        adapter1.setNotes(notes);
+
     }
 
     public void saveButton(View view) {
@@ -180,7 +201,7 @@ public class CourseDetail extends AppCompatActivity {
 
 
     public void goToAssessmentList(View view) {
-        Intent intent=new Intent(CourseDetail.this, AssessmentList.class);
+        Intent intent=new Intent(CourseDetail.this, AssessmentDetail.class);
         startActivity(intent);
     }
 

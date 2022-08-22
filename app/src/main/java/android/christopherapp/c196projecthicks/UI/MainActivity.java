@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
 import android.christopherapp.c196projecthicks.Entity.Courses;
+import android.christopherapp.c196projecthicks.Entity.Notes;
 import android.christopherapp.c196projecthicks.Entity.Term;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Intent;
@@ -38,5 +39,8 @@ public class MainActivity extends AppCompatActivity {
         Assessments assessments=new Assessments(1, "Application Development", "@", "08/18/22", "08/24/22");
         repo.insert(assessments);
 
+
+        Notes notes=new Notes(1,"Note 1", "This is a note about notes");
+        repo.insert(notes);
     }
 }

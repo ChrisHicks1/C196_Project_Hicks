@@ -4,9 +4,11 @@ package android.christopherapp.c196projecthicks.Database;
 import android.app.Application;
 import android.christopherapp.c196projecthicks.DAO.AssessmentsDAO;
 import android.christopherapp.c196projecthicks.DAO.CoursesDAO;
+import android.christopherapp.c196projecthicks.DAO.NotesDAO;
 import android.christopherapp.c196projecthicks.DAO.TermDAO;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
 import android.christopherapp.c196projecthicks.Entity.Courses;
+import android.christopherapp.c196projecthicks.Entity.Notes;
 import android.christopherapp.c196projecthicks.Entity.Term;
 
 import java.util.List;
@@ -18,12 +20,15 @@ public class Repository {
     private CoursesDAO mCoursesDAO;
     private AssessmentsDAO mAssessmentsDAO;
     private TermDAO mTermDAO;
+    private NotesDAO mNotesDAO;
+
     private List<Term> mAllTerms;
     private List<Assessments> mAllAssessments;
     private List<Courses> mAllCourses;
+    private List<Notes> mAllNotes;
 
 
-    private static int NUMBER_OF_THREADS=4;
+    private static int NUMBER_OF_THREADS=5;
     static final ExecutorService databaseExecutor= Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
 
@@ -32,7 +37,59 @@ public class Repository {
         mTermDAO=db.termDAO();
         mAssessmentsDAO = db.assessmentsDAO();
         mCoursesDAO = db.coursesDAO();
+        mNotesDAO = db.notesDAO();
     }
+
+
+    public List<Notes> getAllNotes(){
+        databaseExecutor.execute(()->{
+            mAllNotes=mNotesDAO.getAllNotes();
+        });
+
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        return mAllNotes;
+    }
+    public void insert(Notes notes){
+        databaseExecutor.execute(()->{
+            mNotesDAO.insert(notes);
+
+        });
+
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+    public void update(Notes notes){
+        databaseExecutor.execute(()->{
+            mNotesDAO.update(notes);
+
+        });
+
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+    public void delete(Notes notes){
+        databaseExecutor.execute(()->{
+            mNotesDAO.delete(notes);
+
+        });
+
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
 
     public List<Courses> getAllCourses(){
         databaseExecutor.execute(()->{
