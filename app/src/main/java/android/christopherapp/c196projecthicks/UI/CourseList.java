@@ -48,12 +48,19 @@ public class CourseList extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+
+
+            case R.id.addCourse:
+                Intent courses=new Intent(CourseList.this, CourseDetail.class);
+                startActivity(courses);
+                return true;
+
+            case R.id.refresh:
+                Intent refresh=new Intent(CourseList.this, CourseList.class);
+                startActivity(refresh);
+                return true;
         }
         return super.onOptionsItemSelected(course);
     }
 
-    public void goToCourseInfo(View view) {
-        Intent intent = new Intent(CourseList.this, CourseDetail.class);
-        startActivity(intent);
-    }
 }

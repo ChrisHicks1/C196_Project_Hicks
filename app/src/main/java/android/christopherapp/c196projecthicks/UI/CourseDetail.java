@@ -191,6 +191,8 @@ public class CourseDetail extends AppCompatActivity {
             int newID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
             courses = new Courses(newID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString());
             repository.insert(courses);
+            Intent refresh=new Intent(CourseDetail.this, CourseList.class);
+            startActivity(refresh);
         }
         else {
             courses = new Courses(courseID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString());
@@ -198,13 +200,6 @@ public class CourseDetail extends AppCompatActivity {
         }
 
     }
-
-
-    public void goToAssessmentList(View view) {
-        Intent intent=new Intent(CourseDetail.this, AssessmentDetail.class);
-        startActivity(intent);
-    }
-
 
 
     private void updateLabelStart() {
@@ -228,14 +223,14 @@ public class CourseDetail extends AppCompatActivity {
                 this.finish();
                 return true;
 
-            case R.id.share:
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "text from the note field");
-                sendIntent.putExtra(Intent.EXTRA_TITLE, "Message Title");
-                sendIntent.setType("text/plain");
-                Intent shareIntent = Intent.createChooser(sendIntent, null);
-                startActivity(shareIntent);
+            case R.id.addNotes:
+                Intent note=new Intent(CourseDetail.this, NoteDetail.class);
+                startActivity(note);
+                return true;
+
+            case R.id.addAssessment:
+                Intent assessment=new Intent(CourseDetail.this, AssessmentDetail.class);
+                startActivity(assessment);
                 return true;
 
 

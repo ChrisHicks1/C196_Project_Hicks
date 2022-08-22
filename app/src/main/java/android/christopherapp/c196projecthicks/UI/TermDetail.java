@@ -163,6 +163,8 @@ public class TermDetail extends AppCompatActivity {
             int newID = repository.getAllTerms().get(repository.getAllTerms().size() - 1).getTermID() + 1;
             terms = new Term(newID, editTermName.getText().toString(), editTermStart.getText().toString(), editTermEnd.getText().toString());
             repository.insert(terms);
+            Intent refresh=new Intent(TermDetail.this, TermList.class);
+            startActivity(refresh);
         }
         else {
             terms = new Term(termID, editTermName.getText().toString(), editTermStart.getText().toString(), editTermEnd.getText().toString());
@@ -180,20 +182,19 @@ public class TermDetail extends AppCompatActivity {
 
         }
 
-        public boolean onOptionsItemSelected(MenuItem courses) {
-            switch (courses.getItemId()) {
+        public boolean onOptionsItemSelected(MenuItem terms) {
+            switch (terms.getItemId()) {
                 case android.R.id.home:
                     this.finish();
                     return true;
+
+                case R.id.addCourse:
+                    Intent term=new Intent(TermDetail.this, CourseDetail.class);
+                    startActivity(term);
+                    return true;
             }
-                return super.onOptionsItemSelected(courses);
+                return super.onOptionsItemSelected(terms);
             }
 
-
-
-    public void goToCourseList(View view) {
-        Intent intent=new Intent(TermDetail.this, CourseDetail.class);
-        startActivity(intent);
-    }
 }
 

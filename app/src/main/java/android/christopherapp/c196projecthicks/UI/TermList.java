@@ -46,12 +46,19 @@ public class TermList extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+
+
+            case R.id.addTerm:
+                Intent term=new Intent(TermList.this, TermDetail.class);
+                startActivity(term);
+                return true;
+
+            case R.id.refresh:
+                Intent refresh=new Intent(TermList.this, TermList.class);
+                startActivity(refresh);
+                return true;
         }
         return super.onOptionsItemSelected(terms);
     }
 
-    public void goToTermInfo(View view) {
-        Intent intent=new Intent(TermList.this, TermDetail.class);
-        startActivity(intent);
-    }
 }

@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
+import android.christopherapp.c196projecthicks.Entity.Notes;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Context;
 import android.content.Intent;
@@ -154,6 +155,8 @@ public class AssessmentDetail extends AppCompatActivity {
             int newID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
             assessments = new Assessments(newID, editAssessmentName.getText().toString(), editAssessmentGroup.toString(), editStartDate1.getText().toString(), editEndDate1.getText().toString());
             repository.insert(assessments);
+            Intent refresh=new Intent(AssessmentDetail.this, AssessmentList.class);
+            startActivity(refresh);
         }
         else {
             assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), editAssessmentGroup.toString(), editStartDate1.getText().toString(), editEndDate1.getText().toString());
@@ -238,18 +241,19 @@ public class AssessmentDetail extends AppCompatActivity {
                 return true;
 
             case R.id.delete:
-                for(Assessments a:repository.getAllAssessments()){
-                    if(a.getAssessmentID()==0)currentAssessment=a;
+                for (Assessments n : repository.getAllAssessments()) {
+                    if (n.getAssessmentID() == assessmentID) currentAssessment = n;
                 }
 
-                if(true){
-                    repository.delete(currentAssessment);
-                }
-                else{
-                    Toast.makeText(AssessmentDetail.this,"Can't delete Assessment", Toast.LENGTH_LONG).show();
-                }
+
+                repository.delete(currentAssessment);
+                Toast.makeText(AssessmentDetail.this, currentAssessment.getAssessmentName() + " was deleted", Toast.LENGTH_LONG).show();
+
+                Intent refresh=new Intent(AssessmentDetail.this, AssessmentList.class);
+                startActivity(refresh);
 
         }
+
         return super.onOptionsItemSelected(courses);
     }
 

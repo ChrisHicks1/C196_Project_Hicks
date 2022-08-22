@@ -49,15 +49,22 @@ public class AssessmentList extends AppCompatActivity {
                 this.finish();
                 return true;
 
+            case R.id.addAssessment:
+                Intent assessment=new Intent(AssessmentList.this, AssessmentDetail.class);
+                startActivity(assessment);
+                return true;
+
+            case R.id.refresh:
+                Intent refresh=new Intent(AssessmentList.this, AssessmentList.class);
+                startActivity(refresh);
+                return true;
+
 
         }
         return super.onOptionsItemSelected(assessments);
     }
 
-    public void goToAssessmentInfo(View view) {
-        Intent intent=new Intent(AssessmentList.this, AssessmentDetail.class);
-        startActivity(intent);
-    }
+
 
 
 

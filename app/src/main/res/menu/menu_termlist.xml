@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:orderInCategory="102"
+        android:title="Refresh List"
+        android:id="@+id/refresh"/>
+
+    <item
+        android:orderInCategory="103"
+        android:title="Add Term"
+        android:id="@+id/addTerm"/>
+
 </menu>

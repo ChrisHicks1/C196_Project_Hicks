@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:title="Share Notes"
-        android:orderInCategory="100"
-        android:id="@+id/share"
-        />
-
 
     <item android:title="Notify Start"
         android:orderInCategory="100"
@@ -22,6 +17,16 @@
         android:orderInCategory="102"
         android:title="Delete Course"
         android:id="@+id/delete" />
+
+    <item
+        android:orderInCategory="103"
+        android:title="Add Assessment"
+        android:id="@+id/addAssessment"/>
+
+    <item
+        android:orderInCategory="104"
+        android:title="Add Notes"
+        android:id="@+id/addNotes"/>
 
 
 </menu>
