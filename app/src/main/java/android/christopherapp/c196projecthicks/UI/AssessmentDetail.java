@@ -161,6 +161,8 @@ public class AssessmentDetail extends AppCompatActivity {
         else {
             assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), editAssessmentGroup.toString(), editStartDate1.getText().toString(), editEndDate1.getText().toString());
             repository.update(assessments);
+            Intent refresh=new Intent(AssessmentDetail.this, AssessmentList.class);
+            startActivity(refresh);
         }
 
     }
@@ -217,7 +219,7 @@ public class AssessmentDetail extends AppCompatActivity {
                 }
                 Long startTrigger=myStartDate.getTime();
                 Intent intent1=new Intent(AssessmentDetail.this,MyReceiver.class);
-                intent1.putExtra("key","The start date of Assessment " + getIntent().getStringExtra("name") + " is " + getIntent().getStringExtra("startDate"));
+                intent1.putExtra("key","The start date of Assessment " + getIntent().getStringExtra("assessmentName") + " is " + getIntent().getStringExtra("startDate"));
                 PendingIntent startSender=PendingIntent.getBroadcast(AssessmentDetail.this,MainActivity.numAlert++,intent1,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager1=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager1.set(AlarmManager.RTC_WAKEUP,startTrigger,startSender);
@@ -233,7 +235,7 @@ public class AssessmentDetail extends AppCompatActivity {
                 }
                 Long trigger=myEndDate.getTime();
                 Intent intent=new Intent(AssessmentDetail.this,MyReceiver.class);
-                intent.putExtra("key","The end date of Assessment " + getIntent().getStringExtra("name") + " is " + getIntent().getStringExtra("endDate"));
+                intent.putExtra("key","The end date of Assessment " + getIntent().getStringExtra("assessmentName") + " is " + getIntent().getStringExtra("endDate"));
                 PendingIntent sender=PendingIntent.getBroadcast(AssessmentDetail.this,MainActivity.numAlert++,intent,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
@@ -251,6 +253,7 @@ public class AssessmentDetail extends AppCompatActivity {
 
                 Intent refresh=new Intent(AssessmentDetail.this, AssessmentList.class);
                 startActivity(refresh);
+
 
         }
 

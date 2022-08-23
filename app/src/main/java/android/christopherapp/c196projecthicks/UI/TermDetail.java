@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.Entity.Term;
 import android.christopherapp.c196projecthicks.R;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -169,6 +172,8 @@ public class TermDetail extends AppCompatActivity {
         else {
             terms = new Term(termID, editTermName.getText().toString(), editTermStart.getText().toString(), editTermEnd.getText().toString());
             repository.update(terms);
+            Intent refresh=new Intent(TermDetail.this, TermList.class);
+            startActivity(refresh);
         }
 
     }
@@ -177,7 +182,7 @@ public class TermDetail extends AppCompatActivity {
 
             // Inflate the menu; this adds items to the action bar if it is present
 
-            getMenuInflater().inflate(R.menu.menu_courselist, menu);
+            getMenuInflater().inflate(R.menu.term_detail, menu);
             return true;
 
         }
@@ -189,12 +194,47 @@ public class TermDetail extends AppCompatActivity {
                     return true;
 
                 case R.id.addCourse:
-                    Intent term=new Intent(TermDetail.this, CourseDetail.class);
+                    Intent term = new Intent(TermDetail.this, CourseDetail.class);
                     startActivity(term);
+                    return true;
+
+
+                case R.id.notifyStart:
+                    String startDateFromScreen = editTermStart.getText().toString();
+                    Date myStartDate = null;
+                    try {
+                        myStartDate = sdf.parse(startDateFromScreen);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Long startTrigger = myStartDate.getTime();
+                    Intent intent1 = new Intent(TermDetail.this, MyReceiver.class);
+                    intent1.putExtra("key", "The start date of Term " + getIntent().getStringExtra("termName") + " is " + getIntent().getStringExtra("termStart"));
+                    PendingIntent startSender = PendingIntent.getBroadcast(TermDetail.this, MainActivity.numAlert++, intent1, PendingIntent.FLAG_IMMUTABLE);
+                    AlarmManager alarmManager1 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    alarmManager1.set(AlarmManager.RTC_WAKEUP, startTrigger, startSender);
+                    return true;
+
+                case R.id.notifyEnd:
+                    String endDateFromScreen = editTermEnd.getText().toString();
+                    Date myEndDate = null;
+                    try {
+                        myEndDate = sdf.parse(endDateFromScreen);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Long trigger = myEndDate.getTime();
+                    Intent intent = new Intent(TermDetail.this, MyReceiver.class);
+                    intent.putExtra("key", "The end date of Term " + getIntent().getStringExtra("termName") + " is " + getIntent().getStringExtra("termEnd"));
+                    PendingIntent sender = PendingIntent.getBroadcast(TermDetail.this, MainActivity.numAlert++, intent, PendingIntent.FLAG_IMMUTABLE);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+
                     return true;
             }
                 return super.onOptionsItemSelected(terms);
             }
+
 
 }
 

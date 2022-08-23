@@ -2,13 +2,13 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Notify Start"
+    <item android:title="Notify Assessment Start"
         android:orderInCategory="100"
         android:id="@+id/notifyStart"/>
 
     <item
         android:orderInCategory="101"
-        android:title="Notify End"
+        android:title="Notify Assessment End"
         android:id="@+id/notifyEnd"/>
 
     <item

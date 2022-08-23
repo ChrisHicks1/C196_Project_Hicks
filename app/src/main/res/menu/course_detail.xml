@@ -4,13 +4,13 @@
 
 
 
-    <item android:title="Notify Start"
+    <item android:title="Notify Course Start"
         android:orderInCategory="100"
         android:id="@+id/notifyStart"/>
 
     <item
         android:orderInCategory="101"
-        android:title="Notify End"
+        android:title="Notify Course End"
         android:id="@+id/notifyEnd"/>
 
     <item
@@ -27,6 +27,7 @@
         android:orderInCategory="104"
         android:title="Add Notes"
         android:id="@+id/addNotes"/>
+
 
 
 </menu>

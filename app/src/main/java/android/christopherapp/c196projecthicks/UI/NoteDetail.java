@@ -90,8 +90,8 @@ public class NoteDetail extends AppCompatActivity {
             case R.id.share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "text from the note field");
-                sendIntent.putExtra(Intent.EXTRA_TITLE, "Message Title");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra("contents"));
+                sendIntent.putExtra(Intent.EXTRA_TITLE, getIntent().getStringExtra("title"));
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);

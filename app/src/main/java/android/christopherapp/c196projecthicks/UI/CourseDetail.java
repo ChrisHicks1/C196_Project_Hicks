@@ -197,6 +197,8 @@ public class CourseDetail extends AppCompatActivity {
         else {
             courses = new Courses(courseID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString());
             repository.update(courses);
+            Intent refresh=new Intent(CourseDetail.this, CourseList.class);
+            startActivity(refresh);
         }
 
     }
