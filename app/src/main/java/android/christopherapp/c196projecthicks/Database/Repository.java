@@ -12,7 +12,6 @@ import android.christopherapp.c196projecthicks.Entity.Notes;
 import android.christopherapp.c196projecthicks.Entity.Term;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,7 +32,7 @@ public class Repository {
 
 
     public Repository(Application application){
-        TermCourses db= TermCourses.getDatabase(application);
+        SchedulerDatabase db= SchedulerDatabase.getDatabase(application);
         mTermDAO=db.termDAO();
         mAssessmentsDAO = db.assessmentsDAO();
         mCoursesDAO = db.coursesDAO();

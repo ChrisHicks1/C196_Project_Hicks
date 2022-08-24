@@ -53,7 +53,6 @@
                 android:id="@+id/performance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="@string/performance"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton
@@ -65,6 +64,7 @@
 
 
         </RadioGroup>
+
 
 
 
@@ -90,7 +90,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="08/18/22" />
-    </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

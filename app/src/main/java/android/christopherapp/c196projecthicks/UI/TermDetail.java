@@ -8,6 +8,7 @@ import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.christopherapp.c196projecthicks.Database.Repository;
+import android.christopherapp.c196projecthicks.Entity.Assessments;
 import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.Entity.Term;
 import android.christopherapp.c196projecthicks.R;
@@ -19,15 +20,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class TermDetail extends AppCompatActivity {
+
+    Term currentTerm;
 
     EditText editTermName;
     EditText editTermStart;
@@ -141,14 +146,17 @@ public class TermDetail extends AppCompatActivity {
         };
 
 
-
+//FIND THIS IN THE VIDEO, THE SOLUTION TO DISPLAYING THE ASSOCIATED COURSES INSTEAD OF ALL COURSES MIGHT BE HERE
         RecyclerView recyclerView = findViewById(R.id.recyclerView3);
         Repository repo = new Repository(getApplication());
-        List<Courses> courses = repo.getAllCourses();
         final CoursesAdapter adapter = new CoursesAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setCourses(courses);
+        List<Courses> filteredCourses = new ArrayList<>();
+        for(Courses c:repo.getAllCourses()){
+            if(c.getTermID()==termID)filteredCourses.add(c);
+        }
+        adapter.setCourses(filteredCourses);
     }
 
     private void updateLabelStart() {
@@ -231,8 +239,25 @@ public class TermDetail extends AppCompatActivity {
                     alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
 
                     return true;
+
+                case R.id.delete:
+                    for (Term a : repository.getAllTerms()) {
+                        if (a.getTermID() == termID) currentTerm = a;
+                    }
+                    int numCourses = 0;
+                    for (Courses courses : repository.getAllCourses()) {
+                        if (courses.getCourseID() == termID) ++numCourses;
+                    }
+
+                    if (numCourses == 0) {
+                        repository.delete(currentTerm);
+                        Toast.makeText(TermDetail.this, currentTerm.getTermName() + " was deleted", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(TermDetail.this, "Can't delete Terms with Courses", Toast.LENGTH_LONG).show();
+                    }
+
             }
-                return super.onOptionsItemSelected(terms);
+            return super.onOptionsItemSelected(terms);
             }
 
 

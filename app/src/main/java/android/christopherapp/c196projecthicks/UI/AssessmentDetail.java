@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
-import android.christopherapp.c196projecthicks.Entity.Notes;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AssessmentDetail extends AppCompatActivity {
 
@@ -43,6 +43,7 @@ public class AssessmentDetail extends AppCompatActivity {
     String assessmentType;
     String startDate;
     String endDate;
+    int courseID;
 
     DatePickerDialog.OnDateSetListener startDates;
     DatePickerDialog.OnDateSetListener endDates;
@@ -51,8 +52,8 @@ public class AssessmentDetail extends AppCompatActivity {
     String myFormat;
     SimpleDateFormat sdf;
 
-
     Repository repository;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,19 +64,37 @@ public class AssessmentDetail extends AppCompatActivity {
 
 
         editAssessmentName = findViewById(R.id.editAssessmentName);
-        editAssessmentGroup = findViewById(R.id.editAssessmentGroup);
-        editStartDate1=findViewById(R.id.editStartDate1);
-        editEndDate1=findViewById(R.id.editEndDate1);
+        editStartDate1 = findViewById(R.id.editStartDate1);
+        editEndDate1 = findViewById(R.id.editEndDate1);
+        performance = findViewById(R.id.performance);
+        objective = findViewById(R.id.objective);
 
+        editAssessmentGroup = findViewById(R.id.editAssessmentGroup);
 
         assessmentID = getIntent().getIntExtra("assessmentID", -1);
-
 
         assessmentName = getIntent().getStringExtra("assessmentName");
         editAssessmentName.setText(assessmentName);
 
         assessmentType = getIntent().getStringExtra("assessmentType");
-        editAssessmentGroup.getCheckedRadioButtonId();
+
+
+        if (Objects.equals(assessmentType, "Performance")) {
+            try {
+                performance.setChecked(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (Objects.equals(assessmentType, "Objective")) {
+            try {
+                objective.setChecked(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+                editAssessmentGroup.clearCheck();
+
+        }
 
         startDate=getIntent().getStringExtra("startDate");
         editStartDate1.setText(startDate);
@@ -147,42 +166,54 @@ public class AssessmentDetail extends AppCompatActivity {
         };
     }
 
-
-
-    public void saveButton2(View view) {
-        Assessments assessments;
-        if(assessmentID == -1){
-            int newID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
-            assessments = new Assessments(newID, editAssessmentName.getText().toString(), editAssessmentGroup.toString(), editStartDate1.getText().toString(), editEndDate1.getText().toString());
-            repository.insert(assessments);
-            Intent refresh=new Intent(AssessmentDetail.this, AssessmentList.class);
-            startActivity(refresh);
-        }
-        else {
-            assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), editAssessmentGroup.toString(), editStartDate1.getText().toString(), editEndDate1.getText().toString());
-            repository.update(assessments);
-            Intent refresh=new Intent(AssessmentDetail.this, AssessmentList.class);
-            startActivity(refresh);
-        }
-
-    }
-
-
     public void onRadioButtonClicked(View view){
 
-        boolean checked = ((RadioButton) view).isChecked();
+        Assessments assessments;
 
+        String assessmentType="";
+        boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()){
             case R.id.performance:
                 if(checked)
-
-                    break;
+                    assessmentType="Performance";
+                break;
             case R.id.objective:
                 if(checked)
+                    assessmentType="Objective";
+                break;
+        }
+        assessments = new Assessments(assessmentID, assessmentName, assessmentType, startDate, endDate, courseID);
+        repository.update(assessments);
+    }
 
-                    break;
+
+    public void saveButton2(View view) {
+
+        if(assessmentID == -1) {
+            int newID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
+
+                if (performance.isChecked()) {
+                    Assessments assessments = new Assessments(newID, editAssessmentName.getText().toString(), "Performance", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                    repository.insert(assessments);
+                } else {
+                    Assessments assessments = new Assessments(newID, editAssessmentName.getText().toString(), "Objective", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                    repository.insert(assessments);
+                }
+
+        }
+        else{
+            if (performance.isChecked()) {
+                Assessments assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), "Performance", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                repository.update(assessments);
+            } else {
+                Assessments assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), "Objective", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                repository.update(assessments);
+            }
         }
     }
+
+
+
 
 
     private void updateLabelStart() {
@@ -246,14 +277,8 @@ public class AssessmentDetail extends AppCompatActivity {
                 for (Assessments n : repository.getAllAssessments()) {
                     if (n.getAssessmentID() == assessmentID) currentAssessment = n;
                 }
-
-
                 repository.delete(currentAssessment);
                 Toast.makeText(AssessmentDetail.this, currentAssessment.getAssessmentName() + " was deleted", Toast.LENGTH_LONG).show();
-
-                Intent refresh=new Intent(AssessmentDetail.this, AssessmentList.class);
-                startActivity(refresh);
-
 
         }
 

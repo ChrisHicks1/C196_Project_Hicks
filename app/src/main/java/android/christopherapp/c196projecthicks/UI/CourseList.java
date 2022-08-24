@@ -49,7 +49,6 @@ public class CourseList extends AppCompatActivity {
                 this.finish();
                 return true;
 
-
             case R.id.addCourse:
                 Intent courses=new Intent(CourseList.this, CourseDetail.class);
                 startActivity(courses);

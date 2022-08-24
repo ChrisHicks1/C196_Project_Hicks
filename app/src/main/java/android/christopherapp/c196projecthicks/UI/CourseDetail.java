@@ -11,6 +11,7 @@ import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
 import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.Entity.Notes;
+import android.christopherapp.c196projecthicks.Entity.Term;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Context;
 import android.content.Intent;
@@ -20,10 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +37,7 @@ public class CourseDetail extends AppCompatActivity {
 
     Courses currentCourse;
 
+
     EditText editCourseName;
     EditText editStartDate;
     EditText editEndDate;
@@ -41,6 +45,7 @@ public class CourseDetail extends AppCompatActivity {
     EditText editCIName;
     EditText editCIPhone;
     EditText editCIEmail;
+
 
     int courseID;
     String name;
@@ -50,6 +55,7 @@ public class CourseDetail extends AppCompatActivity {
     String ciName;
     String ciPhone;
     String ciEmail;
+    int termID;
 
 
     DatePickerDialog.OnDateSetListener startDates;
@@ -101,6 +107,9 @@ public class CourseDetail extends AppCompatActivity {
 
         ciEmail=getIntent().getStringExtra("ciEmail");
         editCIEmail.setText(ciEmail);
+
+        termID=getIntent().getIntExtra("termID", -1);
+
 
         repository=new Repository(getApplication());
 
@@ -168,39 +177,41 @@ public class CourseDetail extends AppCompatActivity {
 
         RecyclerView recyclerView=findViewById(R.id.recyclerView2);
         Repository repo=new Repository(getApplication());
-        List<Assessments> assessments=repo.getAllAssessments();
-        final AssessmentAdapter adapter=new AssessmentAdapter(this);
+        final AssessmentAdapter adapter = new AssessmentAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setAssessments(assessments);
+        List<Assessments> filteredAssessments = new ArrayList<>();
+        for(Assessments c:repo.getAllAssessments()){
+            if(c.getCourseID()==courseID)filteredAssessments.add(c);
+        }
+        adapter.setAssessments(filteredAssessments);
 
 
         RecyclerView recyclerView1=findViewById(R.id.recyclerView4);
         Repository repo1=new Repository(getApplication());
-        List<Notes> notes=repo1.getAllNotes();
-        final NoteAdapter adapter1=new NoteAdapter(this);
+        final NoteAdapter adapter1 = new NoteAdapter(this);
         recyclerView1.setAdapter(adapter1);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter1.setNotes(notes);
-
+        List<Notes> filteredNotes = new ArrayList<>();
+        for(Notes n:repo1.getAllNotes()){
+            if(n.getCourseID()==courseID)filteredNotes.add(n);
+        }
+        adapter1.setNotes(filteredNotes);
     }
+
 
     public void saveButton(View view) {
         Courses courses;
+        Term terms;
         if(courseID == -1){
             int newID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-            courses = new Courses(newID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString());
+            courses = new Courses(newID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString(), termID);
             repository.insert(courses);
-            Intent refresh=new Intent(CourseDetail.this, CourseList.class);
-            startActivity(refresh);
         }
         else {
-            courses = new Courses(courseID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString());
+            courses = new Courses(courseID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString(), termID);
             repository.update(courses);
-            Intent refresh=new Intent(CourseDetail.this, CourseList.class);
-            startActivity(refresh);
         }
-
     }
 
 
@@ -285,6 +296,7 @@ public class CourseDetail extends AppCompatActivity {
                 else {
                     Toast.makeText(CourseDetail.this, "Can't delete Courses with Assessments", Toast.LENGTH_LONG).show();
                 }
+
         }
                 return super.onOptionsItemSelected(item);
         }

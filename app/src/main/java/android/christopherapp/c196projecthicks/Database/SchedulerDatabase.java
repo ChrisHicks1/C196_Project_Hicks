@@ -15,20 +15,20 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Term.class, Courses.class, Assessments.class, Notes.class}, version = 11, exportSchema = false)
-public abstract class TermCourses extends RoomDatabase {
+@Database(entities = {Term.class, Courses.class, Assessments.class, Notes.class}, version = 13, exportSchema = false)
+public abstract class SchedulerDatabase extends RoomDatabase {
     public abstract TermDAO termDAO();
     public abstract CoursesDAO coursesDAO();
     public abstract AssessmentsDAO assessmentsDAO();
     public abstract NotesDAO notesDAO();
 
-    private static volatile TermCourses INSTANCE;
+    private static volatile SchedulerDatabase INSTANCE;
 
-    static TermCourses getDatabase(final Context context) {
+    static SchedulerDatabase getDatabase(final Context context) {
         if (INSTANCE == null){
-            synchronized (TermCourses.class) {
+            synchronized (SchedulerDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), TermCourses.class, "myTermCoursesDatabase.db")
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), SchedulerDatabase.class, "myTermCoursesDatabase.db")
                             .fallbackToDestructiveMigration()
                             .build();
                 }

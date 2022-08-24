@@ -16,4 +16,10 @@
         android:orderInCategory="102"
         android:title="Delete Term"
         android:id="@+id/delete" />
+
+    <item
+        android:orderInCategory="103"
+        android:title="Add Course"
+        android:id="@+id/addCourse" />
+
 </menu>

@@ -32,6 +32,7 @@ public class NoteDetail extends AppCompatActivity {
     int noteId;
     String title;
     String contents;
+    int courseID;
 
     Repository repository;
 
@@ -63,11 +64,11 @@ public class NoteDetail extends AppCompatActivity {
         Notes notes;
         if(noteId == -1){
             int newID = repository.getAllNotes().get(repository.getAllNotes().size() - 1).getNoteId() + 1;
-            notes = new Notes(newID, editNoteTitle.getText().toString(), editNoteContent.getText().toString());
+            notes = new Notes(newID, editNoteTitle.getText().toString(), editNoteContent.getText().toString(), courseID);
             repository.insert(notes);
         }
         else {
-            notes = new Notes(noteId, editNoteTitle.getText().toString(), editNoteContent.getText().toString());
+            notes = new Notes(noteId, editNoteTitle.getText().toString(), editNoteContent.getText().toString(), courseID);
             repository.update(notes);
         }
 

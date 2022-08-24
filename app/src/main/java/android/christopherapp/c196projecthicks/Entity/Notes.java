@@ -22,13 +22,17 @@ public class Notes {
     @ColumnInfo(name = "contents")
     private String contents;
 
+    @NonNull
+    @ColumnInfo(name = "courseID")
+    private int courseID;
 
 
 
-    public Notes(@NonNull int noteId, @NonNull String title, @NonNull String contents){
+    public Notes(@NonNull int noteId, @NonNull String title, @NonNull String contents, @NonNull int courseID){
         this.noteId = noteId;
         this.title = title;
         this.contents = contents;
+        this.courseID = courseID;
     }
 
     public int getNoteId() {
@@ -57,6 +61,14 @@ public class Notes {
         this.contents = contents;
     }
 
+    @NonNull
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(@NonNull int courseID) {
+        this.courseID = courseID;
+    }
 
     @NonNull
     @Override
@@ -64,7 +76,8 @@ public class Notes {
         return "Notes{" +
                 "noteId=" + noteId +
                 ", title='" + title + '\'' +
-                ", contents='" + contents +
+                ", contents='" + contents + '\'' +
+                ", courseID=" + courseID +
                 '}';
     }
 }

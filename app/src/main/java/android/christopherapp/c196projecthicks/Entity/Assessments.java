@@ -30,12 +30,17 @@ public class Assessments {
     @ColumnInfo(name = "endDate")
     private String endDate;
 
-    public Assessments(@NonNull int assessmentID, @NonNull String assessmentName, @NonNull String assessmentType, @NonNull String startDate, @NonNull String endDate) {
+    @NonNull
+    @ColumnInfo(name = "courseID")
+    private int courseID;
+
+    public Assessments(@NonNull int assessmentID, @NonNull String assessmentName, @NonNull String assessmentType, @NonNull String startDate, @NonNull String endDate, @NonNull int courseID) {
         this.assessmentID = assessmentID;
         this.assessmentName = assessmentName;
         this.assessmentType = assessmentType;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.courseID = courseID;
     }
 
     public int getAssessmentID() {
@@ -51,7 +56,7 @@ public class Assessments {
         return assessmentName;
     }
 
-    public void setAssessmentName(String assessmentName) {
+    public void setAssessmentName(@NonNull String assessmentName) {
         this.assessmentName = assessmentName;
     }
 
@@ -60,7 +65,7 @@ public class Assessments {
         return assessmentType;
     }
 
-    public void setAssessmentType(String assessmentType) {
+    public void setAssessmentType(@NonNull String assessmentType) {
         this.assessmentType = assessmentType;
     }
 
@@ -69,7 +74,7 @@ public class Assessments {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(@NonNull String startDate) {
         this.startDate = startDate;
     }
 
@@ -78,8 +83,16 @@ public class Assessments {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(@NonNull String endDate) {
         this.endDate = endDate;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
     @NonNull
@@ -91,6 +104,7 @@ public class Assessments {
                 ", assessmentType='" + assessmentType + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
+                ", courseID=" + courseID +
                 '}';
     }
 }
