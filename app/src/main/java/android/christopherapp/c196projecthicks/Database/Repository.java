@@ -24,6 +24,7 @@ public class Repository {
     private List<Term> mAllTerms;
     private List<Assessments> mAllAssessments;
     private List<Courses> mAllCourses;
+    private List<Courses> mThisCourse;
     private List<Notes> mAllNotes;
 
 
@@ -102,6 +103,8 @@ public class Repository {
         }
         return mAllCourses;
     }
+
+
     public void insert(Courses courses){
         databaseExecutor.execute(()->{
             mCoursesDAO.insert(courses);

@@ -30,6 +30,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NotesViewHolde
                     intent.putExtra("noteId",current.getNoteId());
                     intent.putExtra("title",current.getTitle());
                     intent.putExtra("contents",current.getContents());
+                    intent.putExtra("courseName", current.getCourseName());
                     context.startActivity(intent);
                 }
             });

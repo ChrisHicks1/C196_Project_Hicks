@@ -27,5 +27,4 @@ public interface CoursesDAO {
     List<Courses> getAllCourses();
 
 
-
 }

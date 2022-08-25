@@ -9,7 +9,7 @@
     <ScrollView
         android:id="@+id/scrollview1"
         android:layout_width="410dp"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteX="1dp">
@@ -101,7 +101,6 @@
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="1dp">
 
-
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
@@ -120,6 +119,21 @@
                 android:text="08/18/22" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course Name: "/>
+            <EditText
+                android:id="@+id/editCourseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mobile App Development"/>
+        </LinearLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,6 +146,5 @@
 
 
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

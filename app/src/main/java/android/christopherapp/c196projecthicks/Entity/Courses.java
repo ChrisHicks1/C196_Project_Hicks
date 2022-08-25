@@ -45,12 +45,12 @@ public class Courses {
     private String ciEmail;
 
     @NonNull
-    @ColumnInfo(name = "termID")
-    private int termID;
+    @ColumnInfo(name = "termName")
+    private String termName;
 
 
 
-    public Courses(@NonNull int courseID, @NonNull String courseName, @NonNull String startDate, @NonNull String endDate, @NonNull String courseStatus, @NonNull String ciName, @NonNull String ciPhone, @NonNull String ciEmail, @NonNull int termID) {
+    public Courses(@NonNull int courseID, @NonNull String courseName, @NonNull String startDate, @NonNull String endDate, @NonNull String courseStatus, @NonNull String ciName, @NonNull String ciPhone, @NonNull String ciEmail, @NonNull String termName) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.startDate = startDate;
@@ -59,7 +59,7 @@ public class Courses {
         this.ciName = ciName;
         this.ciPhone = ciPhone;
         this.ciEmail = ciEmail;
-        this.termID = termID;
+        this.termName = termName;
 
     }
 
@@ -136,8 +136,8 @@ public class Courses {
     }
 
     @NonNull
-    public int getTermID() {return termID;}
-    public void setTermID(int termID){this.termID = termID;}
+    public String getTermName() {return termName;}
+    public void setTermName(String termName){this.termName = termName;}
 
     @NonNull
     @Override
@@ -151,7 +151,7 @@ public class Courses {
                 ", ciName='" + ciName + '\'' +
                 ", ciPhone='" + ciPhone + '\'' +
                 ", ciEmail='" + ciEmail + '\'' +
-                ", termID=" + termID +
+                ", termName=" + termName +
                 '}';
     }
 }

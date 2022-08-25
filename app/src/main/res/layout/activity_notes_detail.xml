@@ -63,6 +63,21 @@
             android:text="These are useful notes for this course." />
     </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course Name: "/>
+            <EditText
+                android:id="@+id/editCourseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mobile App Development"/>
+        </LinearLayout>
+
 
         <Button
             android:layout_width="wrap_content"

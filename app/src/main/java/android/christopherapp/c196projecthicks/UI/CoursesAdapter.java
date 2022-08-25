@@ -28,13 +28,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CoursesV
                     final Courses current=mCourses.get(position);
                     Intent intent=new Intent(context, CourseDetail.class);
                     intent.putExtra("courseID",current.getCourseID());
-                    intent.putExtra("name",current.getCourseName());
+                    intent.putExtra("courseName",current.getCourseName());
                     intent.putExtra("startDate",current.getStartDate());
                     intent.putExtra("endDate",current.getEndDate());
                     intent.putExtra("status",current.getCourseStatus());
                     intent.putExtra("ciName",current.getCiName());
                     intent.putExtra("ciEmail",current.getCiEmail());
                     intent.putExtra("ciPhone",current.getCiPhone());
+                    intent.putExtra("termName", current.getTermName());
                     context.startActivity(intent);
                 }
             });
@@ -60,8 +61,8 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CoursesV
     public void onBindViewHolder(@NonNull CoursesAdapter.CoursesViewHolder holder, int position) {
         if(mCourses!=null){
             Courses current=mCourses.get(position);
-            String name=current.getCourseName();
-            holder.coursesItemView.setText(name);
+            String courseName=current.getCourseName();
+            holder.coursesItemView.setText(courseName);
         }
         else{
             holder.coursesItemView.setText("No Course Name");

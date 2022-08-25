@@ -23,16 +23,16 @@ public class Notes {
     private String contents;
 
     @NonNull
-    @ColumnInfo(name = "courseID")
-    private int courseID;
+    @ColumnInfo(name = "courseName")
+    private String courseName;
 
 
 
-    public Notes(@NonNull int noteId, @NonNull String title, @NonNull String contents, @NonNull int courseID){
+    public Notes(@NonNull int noteId, @NonNull String title, @NonNull String contents, @NonNull String courseName){
         this.noteId = noteId;
         this.title = title;
         this.contents = contents;
-        this.courseID = courseID;
+        this.courseName = courseName;
     }
 
     public int getNoteId() {
@@ -62,12 +62,12 @@ public class Notes {
     }
 
     @NonNull
-    public int getCourseID() {
-        return courseID;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourseID(@NonNull int courseID) {
-        this.courseID = courseID;
+    public void setCourseName(@NonNull String courseName) {
+        this.courseName = courseName;
     }
 
     @NonNull
@@ -77,7 +77,7 @@ public class Notes {
                 "noteId=" + noteId +
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
-                ", courseID=" + courseID +
+                ", courseName=" + courseName +
                 '}';
     }
 }

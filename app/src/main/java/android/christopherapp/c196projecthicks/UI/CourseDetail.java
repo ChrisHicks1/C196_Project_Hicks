@@ -11,7 +11,6 @@ import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
 import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.Entity.Notes;
-import android.christopherapp.c196projecthicks.Entity.Term;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -31,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CourseDetail extends AppCompatActivity {
 
@@ -45,17 +44,18 @@ public class CourseDetail extends AppCompatActivity {
     EditText editCIName;
     EditText editCIPhone;
     EditText editCIEmail;
+    EditText editTermName;
 
 
     int courseID;
-    String name;
+    String courseName;
     String startDate;
     String endDate;
     String courseStatus;
     String ciName;
     String ciPhone;
     String ciEmail;
-    int termID;
+    String termName;
 
 
     DatePickerDialog.OnDateSetListener startDates;
@@ -83,12 +83,13 @@ public class CourseDetail extends AppCompatActivity {
         editCIName=findViewById(R.id.editCIName);
         editCIPhone=findViewById(R.id.editCIPhone);
         editCIEmail=findViewById(R.id.editCIEmail);
+        editTermName=findViewById(R.id.editTermName);
 
         courseID=getIntent().getIntExtra("courseID", -1);
 
 
-        name=getIntent().getStringExtra("name");
-        editCourseName.setText(name);
+        courseName=getIntent().getStringExtra("courseName");
+        editCourseName.setText(courseName);
 
         startDate=getIntent().getStringExtra("startDate");
         editStartDate.setText(startDate);
@@ -108,7 +109,9 @@ public class CourseDetail extends AppCompatActivity {
         ciEmail=getIntent().getStringExtra("ciEmail");
         editCIEmail.setText(ciEmail);
 
-        termID=getIntent().getIntExtra("termID", -1);
+        termName=getIntent().getStringExtra("termName");
+        editTermName.setText(termName);
+
 
 
         repository=new Repository(getApplication());
@@ -182,7 +185,7 @@ public class CourseDetail extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Assessments> filteredAssessments = new ArrayList<>();
         for(Assessments c:repo.getAllAssessments()){
-            if(c.getCourseID()==courseID)filteredAssessments.add(c);
+            if(Objects.equals(c.getCourseName(), courseName))filteredAssessments.add(c);
         }
         adapter.setAssessments(filteredAssessments);
 
@@ -194,7 +197,7 @@ public class CourseDetail extends AppCompatActivity {
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         List<Notes> filteredNotes = new ArrayList<>();
         for(Notes n:repo1.getAllNotes()){
-            if(n.getCourseID()==courseID)filteredNotes.add(n);
+            if(n.getCourseName().equals(courseName))filteredNotes.add(n);
         }
         adapter1.setNotes(filteredNotes);
     }
@@ -202,14 +205,14 @@ public class CourseDetail extends AppCompatActivity {
 
     public void saveButton(View view) {
         Courses courses;
-        Term terms;
+
         if(courseID == -1){
             int newID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-            courses = new Courses(newID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString(), termID);
+            courses = new Courses(newID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString(), editTermName.getText().toString());
             repository.insert(courses);
         }
         else {
-            courses = new Courses(courseID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString(), termID);
+            courses = new Courses(courseID, editCourseName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString(), editCourseStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(), editCIEmail.getText().toString(), editTermName.getText().toString());
             repository.update(courses);
         }
     }
@@ -257,7 +260,7 @@ public class CourseDetail extends AppCompatActivity {
                 }
                 Long startTrigger = myStartDate.getTime();
                 Intent intent1 = new Intent(CourseDetail.this, MyReceiver.class);
-                intent1.putExtra("key", "The start date of Course " + getIntent().getStringExtra("name") + " is " + getIntent().getStringExtra("startDate"));
+                intent1.putExtra("key", "The start date of Course " + getIntent().getStringExtra("courseName") + " is " + getIntent().getStringExtra("startDate"));
                 PendingIntent startSender = PendingIntent.getBroadcast(CourseDetail.this, MainActivity.numAlert++, intent1, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager1 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager1.set(AlarmManager.RTC_WAKEUP, startTrigger, startSender);
@@ -273,7 +276,7 @@ public class CourseDetail extends AppCompatActivity {
                 }
                 Long trigger = myEndDate.getTime();
                 Intent intent = new Intent(CourseDetail.this, MyReceiver.class);
-                intent.putExtra("key", "The end date of Course " + getIntent().getStringExtra("name") + " is " + getIntent().getStringExtra("endDate"));
+                intent.putExtra("key", "The end date of Course " + getIntent().getStringExtra("courseName") + " is " + getIntent().getStringExtra("endDate"));
                 PendingIntent sender = PendingIntent.getBroadcast(CourseDetail.this, MainActivity.numAlert++, intent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
@@ -294,7 +297,7 @@ public class CourseDetail extends AppCompatActivity {
                     Toast.makeText(CourseDetail.this, currentCourse.getCourseName() + " was deleted", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(CourseDetail.this, "Can't delete Courses with Assessments", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CourseDetail.this, "You can not delete Courses with Assessments", Toast.LENGTH_LONG).show();
                 }
 
         }

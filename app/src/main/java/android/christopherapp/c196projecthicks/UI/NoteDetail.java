@@ -28,11 +28,12 @@ public class NoteDetail extends AppCompatActivity {
 
     EditText editNoteTitle;
     EditText editNoteContent;
+    EditText editCourseName;
 
     int noteId;
     String title;
     String contents;
-    int courseID;
+    String courseName;
 
     Repository repository;
 
@@ -46,6 +47,7 @@ public class NoteDetail extends AppCompatActivity {
 
         editNoteTitle = findViewById(R.id.editNoteTitle);
         editNoteContent = findViewById(R.id.editNoteContent);
+        editCourseName = findViewById(R.id.editCourseName);
 
         noteId = getIntent().getIntExtra("noteId", -1);
 
@@ -56,6 +58,8 @@ public class NoteDetail extends AppCompatActivity {
         contents = getIntent().getStringExtra("contents");
         editNoteContent.setText(contents);
 
+        courseName = getIntent().getStringExtra("courseName");
+        editCourseName.setText(courseName);
 
         repository = new Repository(getApplication());
     }
@@ -64,11 +68,11 @@ public class NoteDetail extends AppCompatActivity {
         Notes notes;
         if(noteId == -1){
             int newID = repository.getAllNotes().get(repository.getAllNotes().size() - 1).getNoteId() + 1;
-            notes = new Notes(newID, editNoteTitle.getText().toString(), editNoteContent.getText().toString(), courseID);
+            notes = new Notes(newID, editNoteTitle.getText().toString(), editNoteContent.getText().toString(), editCourseName.getText().toString());
             repository.insert(notes);
         }
         else {
-            notes = new Notes(noteId, editNoteTitle.getText().toString(), editNoteContent.getText().toString(), courseID);
+            notes = new Notes(noteId, editNoteTitle.getText().toString(), editNoteContent.getText().toString(), editCourseName.getText().toString());
             repository.update(notes);
         }
 

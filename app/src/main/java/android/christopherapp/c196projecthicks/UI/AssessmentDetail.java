@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.christopherapp.c196projecthicks.Database.Repository;
 import android.christopherapp.c196projecthicks.Entity.Assessments;
+import android.christopherapp.c196projecthicks.Entity.Courses;
 import android.christopherapp.c196projecthicks.R;
 import android.content.Context;
 import android.content.Intent;
@@ -37,13 +38,14 @@ public class AssessmentDetail extends AppCompatActivity {
     RadioGroup editAssessmentGroup;
     RadioButton performance;
     RadioButton objective;
+    EditText editCourseName;
 
     int assessmentID;
     String assessmentName;
     String assessmentType;
     String startDate;
     String endDate;
-    int courseID;
+    String courseName;
 
     DatePickerDialog.OnDateSetListener startDates;
     DatePickerDialog.OnDateSetListener endDates;
@@ -68,6 +70,7 @@ public class AssessmentDetail extends AppCompatActivity {
         editEndDate1 = findViewById(R.id.editEndDate1);
         performance = findViewById(R.id.performance);
         objective = findViewById(R.id.objective);
+        editCourseName = findViewById(R.id.editCourseName);
 
         editAssessmentGroup = findViewById(R.id.editAssessmentGroup);
 
@@ -77,7 +80,6 @@ public class AssessmentDetail extends AppCompatActivity {
         editAssessmentName.setText(assessmentName);
 
         assessmentType = getIntent().getStringExtra("assessmentType");
-
 
         if (Objects.equals(assessmentType, "Performance")) {
             try {
@@ -93,7 +95,6 @@ public class AssessmentDetail extends AppCompatActivity {
             }
         }else{
                 editAssessmentGroup.clearCheck();
-
         }
 
         startDate=getIntent().getStringExtra("startDate");
@@ -101,6 +102,9 @@ public class AssessmentDetail extends AppCompatActivity {
 
         endDate=getIntent().getStringExtra("endDate");
         editEndDate1.setText(endDate);
+
+        courseName = getIntent().getStringExtra("courseName");
+        editCourseName.setText(courseName);
 
         repository = new Repository(getApplication());
 
@@ -182,7 +186,7 @@ public class AssessmentDetail extends AppCompatActivity {
                     assessmentType="Objective";
                 break;
         }
-        assessments = new Assessments(assessmentID, assessmentName, assessmentType, startDate, endDate, courseID);
+        assessments = new Assessments(assessmentID, assessmentName, assessmentType, startDate, endDate, courseName);
         repository.update(assessments);
     }
 
@@ -192,28 +196,26 @@ public class AssessmentDetail extends AppCompatActivity {
         if(assessmentID == -1) {
             int newID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
 
+
                 if (performance.isChecked()) {
-                    Assessments assessments = new Assessments(newID, editAssessmentName.getText().toString(), "Performance", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                    Assessments assessments = new Assessments(newID, editAssessmentName.getText().toString(), "Performance", editStartDate1.getText().toString(), editEndDate1.getText().toString(), editCourseName.getText().toString());
                     repository.insert(assessments);
                 } else {
-                    Assessments assessments = new Assessments(newID, editAssessmentName.getText().toString(), "Objective", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                    Assessments assessments = new Assessments(newID, editAssessmentName.getText().toString(), "Objective", editStartDate1.getText().toString(), editEndDate1.getText().toString(), editCourseName.getText().toString());
                     repository.insert(assessments);
                 }
-
         }
+
         else{
             if (performance.isChecked()) {
-                Assessments assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), "Performance", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                Assessments assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), "Performance", editStartDate1.getText().toString(), editEndDate1.getText().toString(), editCourseName.getText().toString());
                 repository.update(assessments);
             } else {
-                Assessments assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), "Objective", editStartDate1.getText().toString(), editEndDate1.getText().toString(), courseID);
+                Assessments assessments = new Assessments(assessmentID, editAssessmentName.getText().toString(), "Objective", editStartDate1.getText().toString(), editEndDate1.getText().toString(), editCourseName.getText().toString());
                 repository.update(assessments);
             }
         }
     }
-
-
-
 
 
     private void updateLabelStart() {

@@ -154,7 +154,7 @@ public class TermDetail extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Courses> filteredCourses = new ArrayList<>();
         for(Courses c:repo.getAllCourses()){
-            if(c.getTermID()==termID)filteredCourses.add(c);
+            if(c.getTermName().equals(termName))filteredCourses.add(c);
         }
         adapter.setCourses(filteredCourses);
     }
@@ -253,7 +253,7 @@ public class TermDetail extends AppCompatActivity {
                         repository.delete(currentTerm);
                         Toast.makeText(TermDetail.this, currentTerm.getTermName() + " was deleted", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(TermDetail.this, "Can't delete Terms with Courses", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TermDetail.this, "You can not delete Terms with Courses", Toast.LENGTH_LONG).show();
                     }
 
             }

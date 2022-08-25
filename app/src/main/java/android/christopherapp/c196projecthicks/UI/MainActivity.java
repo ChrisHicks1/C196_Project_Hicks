@@ -30,17 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         Repository repo = new Repository(getApplication());
-        Courses courses=new Courses(1, "Mobile App Development", "07/19/2022", "08/22/2022","In Progress", "CI Person", "222-222-2222", "anEmail@email.com", 1);
+        Courses courses=new Courses(1, "Mobile App Development", "07/19/2022", "08/22/2022","In Progress", "CI Person", "222-222-2222", "anEmail@email.com", "First Term");
         repo.insert(courses);
 
         Term term=new Term(1, "First Term", "06/01/2022", "11/30/2022");
         repo.insert(term);
 
-        Assessments assessments=new Assessments(1, "Application Development", "@", "08/18/22", "08/24/22", 1);
+        Assessments assessments=new Assessments(1, "Application Development", "Performance", "08/18/22", "08/24/22", "Mobile App Development");
         repo.insert(assessments);
 
 
-        Notes notes=new Notes(1,"Note 1", "This is a note about notes", 1);
+        Notes notes=new Notes(1,"Note 1", "This is a note about notes", "Mobile App Development");
         repo.insert(notes);
     }
 }

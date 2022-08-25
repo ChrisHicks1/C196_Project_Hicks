@@ -30,17 +30,16 @@ public class Assessments {
     @ColumnInfo(name = "endDate")
     private String endDate;
 
-    @NonNull
-    @ColumnInfo(name = "courseID")
-    private int courseID;
+    @ColumnInfo(name = "courseName")
+    private String courseName;
 
-    public Assessments(@NonNull int assessmentID, @NonNull String assessmentName, @NonNull String assessmentType, @NonNull String startDate, @NonNull String endDate, @NonNull int courseID) {
+    public Assessments(@NonNull int assessmentID, @NonNull String assessmentName, @NonNull String assessmentType, @NonNull String startDate, @NonNull String endDate, String courseName) {
         this.assessmentID = assessmentID;
         this.assessmentName = assessmentName;
         this.assessmentType = assessmentType;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.courseID = courseID;
+        this.courseName = courseName;
     }
 
     public int getAssessmentID() {
@@ -87,12 +86,12 @@ public class Assessments {
         this.endDate = endDate;
     }
 
-    public int getCourseID() {
-        return courseID;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     @NonNull
@@ -104,7 +103,7 @@ public class Assessments {
                 ", assessmentType='" + assessmentType + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
-                ", courseID=" + courseID +
+                ", courseName=" + courseName +
                 '}';
     }
 }
